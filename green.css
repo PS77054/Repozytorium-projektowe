@@ -1,6 +1,10 @@
 	body { font-family: Arial; 
 		margin-left: 0; padding: 10px; line-height: 1; background-color: #78ad63; text-align: center;  }
 	
+	main { position: relative; }
+	
+	.cv { flex: 2; }
+	
 	h1 { font-size: 18px; color: purple; margin-bottom: 5px }
     
 	h2 { font-size: 17px; color: blue; margin-bottom: 10px; margin-top: 20px }
@@ -21,3 +25,17 @@
 		background-color: #c9cfd1; width: 60%; max-width: 700px; border-radius: 12px; }
 		
 	button:hover {background-color: #228B22; }
+
+	.formularz { position: fixed; top: 150px; left: 50%; margin-left: 550px; width: 300px;  background-color: #c9cfd1 }
+	
+	form { max-width: 300px; margin: 10px; }
+
+	.wiersz { display: flex; align-items: center; gap: 10px; }
+
+	.wiersz label { width: 80px; text-align: left; }
+
+	.pole { flex: 1; }
+
+	.pole input, .pole textarea { width: 180px; }
+
+	.blad { color: red; font-size: 14px; margin-top: 5px; }
