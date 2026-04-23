@@ -87,3 +87,37 @@ document.getElementById("formularz").addEventListener("submit", function(e)
 		this.reset();
     }
 })
+
+async function pobierzDane() {
+  try {
+	const response = await fetch("dane.json");
+	if (!response.ok) throw new Error("Brak pliku JSON!");
+	
+    const data = await response.json();
+
+    if (data.umiejetnosci) {
+        const listaUm = document.getElementById("umiejetnosci");
+        listaUm.innerHTML = ""; 
+        data.umiejetnosci.forEach(item => {
+            const li = document.createElement("li");
+            li.textContent = item;
+            listaUm.appendChild(li);
+        });
+    }
+	
+	if (data.projekty) {
+        const listaProj = document.getElementById("projekty");
+        listaProj.innerHTML = ""; 
+        data.projekty.forEach(item => {
+            const li = document.createElement("li");
+            li.textContent = item;
+            listaProj.appendChild(li);
+        });
+    }
+		
+    } catch (error) {
+    console.error("Błąd pobierania:", error);
+  }
+}
+
+pobierzDane();
