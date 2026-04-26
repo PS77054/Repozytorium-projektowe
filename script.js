@@ -65,8 +65,8 @@ document.getElementById("formularz").addEventListener("submit", function(e)
     // Walidacja email 
     let emailZnaki = /@/;
 
-    if (!emailZnaki.test(email)) {
-        document.getElementById("blad-email").textContent = "Niepoprawny email!";
+    if (email.trim() === "") {
+        document.getElementById("blad-email").textContent = "Email jest  wymagany!";
         document.getElementById("email").focus();
 		danePoprawne = false;
     } else if (!emailZnaki.test(email)) {
