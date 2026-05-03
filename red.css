@@ -49,4 +49,12 @@
 	.pole input, .pole textarea { width: 180px; }
 
 	.blad { color: red; font-size: 14px; margin-top: 5px; }
+	
+	#notatki { list-style: none; padding-left: 0; }
+
+	#notatki li { display: flex; align-items: center; gap: 6px; }
+
+	#notatki li::before { content: "•"; flex-shrink: 0; }
+	
+	#notatki li button { margin-left: auto; }
 

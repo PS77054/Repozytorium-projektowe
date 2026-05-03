@@ -10,15 +10,15 @@ function PokazUkryjDoswiadczenie()
     }
 }
 
-function ZmienMotyw() 
-{
+function ZmienMotyw() {
     const style = document.getElementById("style");
 
-    // Zmiana motywu na zielony lub czerwony
-	if (style.getAttribute("href") === "red.css") {
+    if (style.getAttribute("href") === "red.css") {
         style.setAttribute("href", "green.css");
+        localStorage.setItem("motyw", "green.css"); 
     } else {
         style.setAttribute("href", "red.css");
+        localStorage.setItem("motyw", "red.css"); 
     }
 }
 
@@ -121,3 +121,61 @@ async function pobierzDane() {
 }
 
 pobierzDane();
+
+// Pobieranie z localStorage przy starcie
+function wczytajNotatke() {
+    const notatki = JSON.parse(localStorage.getItem("mojeNotatki")) || [];
+    const lista = document.getElementById("notatki");
+    lista.innerHTML = "";
+
+    notatki.forEach((item, index) => {
+        const notatka = document.createElement("li");
+        notatka.textContent = item;
+
+        const przycisk = document.createElement("button");
+        przycisk.textContent = "Usuń";
+        przycisk.onclick = () => usunNotatke(index);
+
+        notatka.appendChild(przycisk);
+        lista.appendChild(notatka);
+    });
+}
+
+// Dodawanie notatki
+function dodajNotatke() {
+    const notatka = document.getElementById("nowa-notatka");
+    const tekst = notatka.value.trim();
+
+    if (tekst === "") return;
+
+    const notatki = JSON.parse(localStorage.getItem("mojeNotatki")) || [];
+    notatki.push(tekst);
+
+    localStorage.setItem("mojeNotatki", JSON.stringify(notatki));
+
+    notatka.value = "";
+    wczytajNotatke();
+}
+
+// Usuwanie notatki
+function usunNotatke(index) {
+    const notatki = JSON.parse(localStorage.getItem("mojeNotatki")) || [];
+
+    notatki.splice(index, 1);
+
+    localStorage.setItem("mojeNotatki", JSON.stringify(notatki));
+    wczytajNotatke();
+}
+
+// Uruchom po załadowaniu strony
+wczytajNotatke();
+
+function wczytajMotyw() {
+    const zapisanyMotyw = localStorage.getItem("motyw");
+
+    if (zapisanyMotyw) {
+        document.getElementById("style").setAttribute("href", zapisanyMotyw);
+    }
+}
+
+wczytajMotyw();
