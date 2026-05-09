@@ -13,6 +13,7 @@ function PokazUkryjDoswiadczenie()
 function ZmienMotyw() {
     const style = document.getElementById("style");
 
+	// Zmiana motywu
     if (style.getAttribute("href") === "red.css") {
         style.setAttribute("href", "green.css");
         localStorage.setItem("motyw", "green.css"); 
@@ -83,11 +84,29 @@ document.getElementById("formularz").addEventListener("submit", function(e)
     }
 
     if (danePoprawne) {
+		
+		// Własne ID dokumentu
+		const id = imie + "_" + nazwisko + "_" + Date.now();
+
+		// Zapis do Firebase
+		setDoc(doc(db, "wiadomosci", id), {
+			imie: imie,
+			nazwisko: nazwisko,
+			email: email,
+			wiadomosc: wiadomosc,
+			data: new Date()
+    })
+    .then(() => {
         alert("Formularz wysłany poprawnie!");
-		this.reset();
+        this.reset();
+    })
+    .catch((error) => {
+        console.error("Błąd:", error);
+    });
     }
 })
 
+// Pobranie danych z pliku json
 async function pobierzDane() {
   try {
 	const response = await fetch("dane.json");
@@ -177,5 +196,7 @@ function wczytajMotyw() {
         document.getElementById("style").setAttribute("href", zapisanyMotyw);
     }
 }
+
+// Wczytanie motywu
 
 wczytajMotyw();

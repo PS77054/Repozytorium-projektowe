@@ -130,5 +130,33 @@
 		<p>Wyrażam zgodę na przetwarzanie moich danych osobowych</p>
 	</footer>
 	
+	<script type="module">
+
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+
+		import {
+			getFirestore,
+			doc,
+			setDoc
+			} from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+		const firebaseConfig = {
+			apiKey: "AIzaSyAfTIoWb9_hnG6D84-pGeIW2iaqMge5jOk",
+			authDomain: "zad8backend.firebaseapp.com",
+			projectId: "zad8backend",
+			storageBucket: "zad8backend.firebasestorage.app",
+			messagingSenderId: "744421863434",
+			appId: "1:744421863434:web:27015f0ba8648b8396eff3"
+		};
+
+		const app = initializeApp(firebaseConfig);
+		const db = getFirestore(app);
+
+		window.db = db;
+		window.doc = doc;
+		window.setDoc = setDoc;
+
+	</script>
+
 </body>
 </html>
